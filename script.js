@@ -12,10 +12,11 @@ const personIsMarried = database.filter(function (person) {
 });
 console.log(JSON.stringify(personIsMarried));
 /*2. Print database sorted by age ASC. (min->max) (sort)*/
-const databaseSort = database.sort(function (a, b) {
-    if (a.age < b.age) return -1;
-    if (a.age > b.age) return 1;
-    if (a.age = b.age) return a.name - b.name;
+const databaseSort = database.sort(function (person1, person2) {
+    /*if (person1.age < person2.age) return -1;
+    if (person1.age > person2.age) return 1;
+    if (person1.age = person2.age) return person1.name - person2.name;*/
+    return person1.age - person2.age;
 });
 console.log(JSON.stringify(databaseSort));
 /*3. Calculate average age. (reduce)*/
@@ -29,12 +30,14 @@ const average = database.reduce(function (accum, item, index, array) {
 console.log(average);
 /*4. Print statistic by country.
 {'Israel':3, ...}*/
-const statisticByCountry = database.reduce(function (accum, value, index, array) {
-    if(accum[value.country]){
+const statisticByCountry = database.reduce(function (accum, value) {
+   /* if(accum[value.country]){
         accum[value.country] ++;
     } else {
         accum[value.country] = 1;
-    } return accum;
+    }*/
+    (accum[value.country])?accum[value.country] ++:accum[value.country] = 1;
+    return accum;
 },{});
 console.log(statisticByCountry);
 
